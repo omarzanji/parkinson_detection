@@ -74,7 +74,7 @@ class Model:
         '''
         evalset = [(self.x_train, self.y_train), (self.x_test,self.y_test)]
 
-        self.model = XGBClassifier(use_label_encoder=False, eval_metric='logloss', n_estimators=500)
+        self.model = XGBClassifier(use_label_encoder=False, eval_metric='logloss', n_estimators=100)
         self.model.fit(self.x_train, self.y_train,eval_set=evalset)
         self.y_pred = self.model.predict(self.x_test)
         self.accuracy = accuracy_score(self.y_test,self.y_pred)*100
@@ -86,8 +86,8 @@ class Model:
         fig1 = plt.figure()
         plt.plot(loss['validation_0']['logloss'], label='train')
         plt.plot(loss['validation_1']['logloss'], label='test')
-        plt.xlabel('Loss')
-        plt.ylabel('Iterations')
+        plt.ylabel('Loss')
+        plt.xlabel('Iterations')
         plt.title('XGBoost Learning Curves')
         plt.legend()
         plt.show()
